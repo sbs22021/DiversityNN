@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torchvision
 from .MNIST1D import MNIST1DDataset
+from .WQI import WQIDataset
 
 
 class DataProcessor(ABC, nn.Module):
@@ -174,3 +175,44 @@ class CIFAR(DataProcessor):
             torch.Tensor: reshaped data
         """
         return data.reshape(-1, 3 * 32 * 32)
+
+
+class WQI(DataProcessor):
+    """WQI dataset and manipulation tools"""
+
+    def __init__(self, options):
+        super().__init__(options)
+        self.input_size = 29
+        self.output_size = 5
+
+    def process(self):
+        """Prepare WQi for use by the network"""
+        train_loader = torch.utils.data.DataLoader(
+            WQIDataset(
+                root_path=self.options.input_data,
+                train=True,
+                transform=None
+            ),
+            **self.options.kwargs
+        )
+
+        test_loader = torch.utils.data.DataLoader(
+            WQIDataset(
+                root_path=self.options.input_data,
+                train=False,
+                transform=None
+            ),
+            **self.options.kwargs
+        )
+        return train_loader, test_loader
+
+    def fc_reshape(self, data: torch.Tensor) -> torch.Tensor:
+        """Reshapes WQI data for FC use
+
+        Args:
+            data (torch.Tensor): input data
+
+        Returns:
+            torch.Tensor: reshaped data
+        """
+        return data.reshape(-1, 29)

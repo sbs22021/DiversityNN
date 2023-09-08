@@ -10,7 +10,7 @@ import numpy as np
 import random
 from Helper.Dir import makepath
 from Helper.Parser import parse
-from DataLoading.DataProcessor import MNIST1D, MNIST, CIFAR
+from DataLoading.DataProcessor import MNIST1D, MNIST, CIFAR, WQI
 
 Description = "MetaLearningDiversity"
 args = parse(Description)  # parse cmd arguments to driver
@@ -96,7 +96,9 @@ def process_options(Options):
         makepath(Options.output_folder + "Saved_models/")
 
     # Initialize dataset objects
-    if Options.dataset_name == "MNIST1D":
+    if Options.dataset_name == "WQI":
+        Options.dataset = WQI(Options)
+    elif Options.dataset_name == "MNIST1D":
         Options.dataset = MNIST1D(Options)
     elif Options.dataset_name == "MNIST":
         Options.dataset = MNIST(Options)

@@ -4,7 +4,8 @@ Trainer for using the standard pytorch model for validating the metalearned acti
 import torch
 import numpy as np
 from typing import Union, Tuple
-from Architecture.validation_network import FCN, CNN
+from Architecture.validation_network import FCN
+##from Architecture.validation_network import CNN
 
 
 class Agent:
@@ -27,8 +28,8 @@ class Agent:
         self.device = Options.device
         if Options.nn_type == "FCN":
             self.model = FCN(Options)
-        elif Options.nn_type == "CNN":
-            self.model = CNN(Options)
+        #elif Options.nn_type == "CNN":
+            #self.model = CNN(Options)
         self.dataset = Options.dataset
         self.train_loader, self.test_loader = self.dataset.process()
 

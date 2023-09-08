@@ -57,7 +57,7 @@ def functional_mlp(
             W2 = param_vec[pointer : pointer + H * O].reshape(O, H)
             pointer += O * H
             b2 = param_vec[pointer : pointer + O].reshape(1, -1)
-
+            
             activity = (W1 @ x.t()).t() + b1  # batches x hidden_size
             split_idx = int(H / Options.n_activations)
             h = []
