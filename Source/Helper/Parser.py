@@ -61,6 +61,12 @@ def parse(description: str) -> Namespace:
         help="Hidden Layer size for activation function",
     )
     parser.add_argument(
+        "--inner_input_size",
+        default=29,
+        type=int,
+        help="Dataset dimension size or input size for classifier",
+    )
+    parser.add_argument(
         "--verbose", dest="verbose", action="store_true", help="Verbose output"
     )
     parser.add_argument(
