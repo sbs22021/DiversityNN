@@ -45,7 +45,7 @@ class options:
         self.outer_batch_size = args.outer_batch_size
         self.inner_batch_size = args.inner_batch_size
         self.outer_input_size = 1
-        self.inner_input_size = 40
+        self.inner_input_size = args.inner_input_size
         self.outer_hidden_size = args.outer_hidden_size
         self.inner_hidden_size = args.inner_hidden_size
         self.outer_output_size = 1
@@ -82,7 +82,13 @@ class options:
 
     def __repr__(self):
         return f"{self.run_label} \nDataset: {self.dataset_name} \nactivation function: {self.activation_name} \n"\
-            f"number of epochs planned: {self.n_epochs}\ndevice: {self.device} \n"
+            f"number of epochs planned: {self.n_epochs}\nsteps: {self.steps} \n" \
+            f"n_activations: {self.n_activations}\nactivation: {self.device} \n" \
+            f"inner_batch_size: {self.inner_batch_size}\ninner_input_size: {self.inner_input_size} \n"\
+            f"outer_batch_size: {self.outer_batch_size}\nouter_input_size: {self.outer_input_size} \n"\
+            f"inner_hidden_size: {self.inner_hidden_size}\ninner_output_size: {self.inner_output_size} \n"\
+            f"outer_hidden_size: {self.outer_hidden_size}\nouter_output_size: {self.outer_output_size} \n"
+    
 
 
 def process_options(Options):
